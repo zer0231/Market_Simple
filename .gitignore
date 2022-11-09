@@ -27,7 +27,7 @@ share/python-wheels/
 *.egg
 instance/*
 models/*
-static/images/user_upload/*
+static/images/user_upload/
 MANIFEST
 
 # PyInstaller
