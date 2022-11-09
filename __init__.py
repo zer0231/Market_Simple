@@ -110,6 +110,15 @@ def profile():
         print(session["logged_user"])
         return render_template("profile.html",title=session.get("logged_user"))
 
+@app.route('/products/id/<pid>')
+def product_detail(pid):
+    try:
+        product_detail = Product.query.join(Category, Product.p_category==Category.c_id).add_columns(Product.p_id,Product.p_name,Product.p_desc,Product.p_image,Category.c_name).filter(Product.p_id == pid).one()
+        print(product_detail.p_id)
+        return render_template("product_detail.html",title="Product",product=product_detail)
+    except:
+        return redirect("/")
+
 @app.route('/login',methods=["POST","GET"])
 def login():
     if request.method == "POST":
@@ -132,7 +141,10 @@ def login():
         #     return render_template("login.html",title="login")
     else:
         return render_template("login.html",title="login")
-
+@app.route('/logout')
+def logout():
+    session.pop("logged_user")
+    return redirect('/')
 @app.route('/register',methods=["POST","GET"])
 def register():
     if request.method == "POST":

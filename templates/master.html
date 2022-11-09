@@ -18,7 +18,12 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link" aria-current="page" href="/">Home</a>
+              {% if not session.get("logged_user"): %}
               <a class="nav-link" href="/login">Login</a>
+              {% else %}
+              <a class="nav-link" href="/profile">{{session.get("logged_user")}}</a>
+              <a class="nav-link" href="/logout">Logout</a>
+              {% endif %}
               <a class="nav-link" href="/admin">Admin</a>
             </div>
           </div>
