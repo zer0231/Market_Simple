@@ -1,0 +1,47 @@
+{% extends "master.html" %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %} 
+
+<h1>
+    Admin Panel
+</h1>
+
+<!--#FILTER THE INPUT FIELD-->
+
+<div id="upload_product">
+    <form action="/admin" enctype="multipart/form-data" id="upload" method="post">
+        <input type="text" class="form-control" name="product_name" id="" placeholder="Enter name">
+
+        <label for="product_category">Choose a category:</label>
+        <select name="product_category" id="p_category">
+        {% for category in categories %}
+            <option value="{{category.c_id}}">{{category.c_name}}</option>
+        {% endfor %}
+        </select>
+        <input type="text" class="form-control" name="product_description" id="" placeholder="Enter discription">
+        <input type="text" class="form-control" name="product_manufacturer" id="" placeholder="Enter manufacturer">
+        Image:<input type="file" id="" name="product_image" accept=".jpg,.png">
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="active_status" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Active ?</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</div>
+
+<div id="add_category">
+    <form action="/admin/add-category" method="post">
+        <input type="text" name="category_name" placeholder="Enter name of category" id="">
+        <input type="submit" value="ok"/>
+    </form>
+</div>
+
+<div id="modify_product">
+
+</div>
+
+
+{% endblock %}
